@@ -89,3 +89,15 @@ app.put("/collection/:collectionName/:id", (req, res, next) => {
     }
   );
 });
+
+app.get("/search/:collectionName", (req, res, next) => {
+  const searchTerm = req.query.q || "";
+  const searchRegex = new RegExp(searchTerm, "i");
+
+  const query = { $or: [{ title: searchRegex }, { location: searchRegex }] };
+
+  req.collection.find(query).toArray((err, results) => {
+    if (err) return next(err);
+    res.send(results);
+  });
+});
