@@ -45,3 +45,7 @@ MongoClient.connect("mongodb+srv://blockstree:Rars1234@cst3144.zixj3.mongodb.net
   db = client.db("webstore");
   console.log("Connected to MongoDB");
 });
+
+app.get("/", (req, res, next) => {
+  res.send("Select a collection, e.g., /collection/messages");
+});
