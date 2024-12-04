@@ -30,3 +30,9 @@ app.use((req, res, next) => {
   res.end("You done goofed(did not find static file)");
   next();
 });
+
+app.use(express.json());
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  next();
+});
