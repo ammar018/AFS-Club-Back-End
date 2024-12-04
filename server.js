@@ -36,3 +36,12 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   next();
 });
+
+const MongoClient = require("mongodb").MongoClient;
+
+let db;
+MongoClient.connect("mongodb+srv://blockstree:Rars1234@cst3144.zixj3.mongodb.net/", (err, client) => {
+  if (err) throw err;
+  db = client.db("webstore");
+  console.log("Connected to MongoDB");
+});
