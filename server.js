@@ -21,11 +21,11 @@ app.use((req, res, next) => {
 });
 
 const path = require("path");
-const imagePath = path.resolve(__dirname, "image");
+const imagePath = path.resolve(__dirname, "images");
 
-app.use("/image", express.static(imagePath));
+app.use("/images", express.static(imagePath));
 
-app.use((req, res, next) => {
+app.get("/images", (req, res, next) => {
   res.writeHead(200, { "Content-Type": "text/plain" });
   res.end("You done goofed(did not find static file)");
   next();
