@@ -40,11 +40,14 @@ app.use((req, res, next) => {
 const MongoClient = require("mongodb").MongoClient;
 
 let db;
-MongoClient.connect("mongodb+srv://blockstree:Rars1234@cst3144.zixj3.mongodb.net/", (err, client) => {
-  if (err) throw err;
-  db = client.db("webstore");
-  console.log("Connected to MongoDB");
-});
+MongoClient.connect(
+  "mongodb+srv://ammarashfaq16:System%4021@cluster0.nclat.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+  (err, client) => {
+    if (err) throw err;
+    db = client.db("webstore");
+    console.log("Connected to MongoDB");
+  }
+);
 
 app.get("/", (req, res, next) => {
   res.send("Select a collection, e.g., /collection/messages");
