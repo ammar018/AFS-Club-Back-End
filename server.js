@@ -49,3 +49,15 @@ MongoClient.connect("mongodb+srv://blockstree:Rars1234@cst3144.zixj3.mongodb.net
 app.get("/", (req, res, next) => {
   res.send("Select a collection, e.g., /collection/messages");
 });
+
+app.param("collectionName", (req, res, next, collectionName) => {
+  req.collection = db.collection(collectionName);
+  return next();
+});
+
+app.get("/collection/:collectionName", (req, res, next) => {
+  req.collection.find({}).toArray((e, results) => {
+    if (e) return next(e);
+    res.send(results);
+  });
+});
