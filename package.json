@@ -1,6 +1,16 @@
 {
-    "dependencies": {
-        "express": "^4.21.1",
-        "mongodb": "^3.7.4"
-    }
+  "name": "afs-club-back-end",
+  "version": "1.0.0",
+  "description": "## Links",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.21.2",
+    "mongodb": "^3.6.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
 }

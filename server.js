@@ -1,10 +1,6 @@
 const express = require("express");
 const app = express();
-app.set("port", 3000);
-
-app.listen(app.get("port"), () => {
-  console.log(`Server is running on http://localhost:${app.get("port")}`);
-});
+const MongoClient = require("mongodb").MongoClient;
 
 app.use((req, res, next) => {
   const method = req.method;
@@ -36,24 +32,19 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-  response.setHeader(
+  res.setHeader(
     "Access-Control-Allow-Headers",
     "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
   );
   next();
 });
 
-const MongoClient = require("mongodb").MongoClient;
-
 let db;
-MongoClient.connect(
-  "mongodb+srv://ammarashfaq16:System%4021@cluster0.nclat.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
-  (err, client) => {
-    if (err) throw err;
-    db = client.db("webstore");
-    console.log("Connected to MongoDB");
-  }
-);
+MongoClient.connect("mongodb+srv://ammarashfaq16:System@21@cluster0.nclat.mongodb.net/", (err, client) => {
+  if (err) throw err;
+  db = client.db("webstore");
+  console.log("Connected to MongoDB");
+});
 
 app.get("/", (req, res, next) => {
   res.send("Select a collection, e.g., /collection/messages");
@@ -109,4 +100,10 @@ app.get("/search/:collectionName", (req, res, next) => {
     if (err) return next(err);
     res.send(results);
   });
+});
+
+// Start server
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log("Server running at http://localhost:" + port);
 });
